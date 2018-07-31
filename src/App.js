@@ -1,13 +1,15 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import Cabecalho from './components/Cabecalho';
-import { Botao1, Botao2 } from './components/Botao';
+import NavMenu from './components/NavMenu';
 
 class App extends Component {
   render() {
     return (
       <Fragment>
-        <Cabecalho usuario="@alex_aquiles" />
+        <Cabecalho>
+          <NavMenu usuario="@alex_aquiles" />
+        </Cabecalho>
       </Fragment>
     );
   }

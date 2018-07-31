@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './cabecalho.css'
-import './navMenu.css'
 
 class Cabecalho extends Component {
     render() {
@@ -14,39 +13,7 @@ class Cabecalho extends Component {
                     <a href="">Twitelum</a>
                   </h1>
 
-                  <nav className="navMenu">
-                    <ul className="navMenu__lista">
-
-                      <li className="navMenu__item">
-                        <a className="navMenu__link">
-                          Bem vindo(a): <br/>
-                          <strong>{ this.props.usuario }</strong>
-                        </a>
-                      </li>
-
-                      <li className="navMenu__item">
-                        <a className="navMenu__link">
-                          Página Inicial
-                        </a>
-                      </li>
-
-
-                      <li className="navMenu__item">
-                        <a className="navMenu__link" href="">
-                          Hashtags
-                        </a>
-                      </li>
-
-                      <li className="navMenu__item">
-                        <a className="navMenu__link" href="">
-                          Logout
-                        </a>
-                      </li>
-
-
-
-                    </ul>
-                  </nav>
+                 { this.props.children }
 
                 </div>
 
