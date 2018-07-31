@@ -9,7 +9,10 @@ class App extends Component {
       <Fragment>
         <Cabecalho usuario="@alex_aquiles" />
         <Botao1 cor="red" texto="Teste 1"/>
-        <Botao2 tipo="danger" texto="Teste 2"/>
+        <Botao1 cor="blue" texto="Teste 2"/>
+        <Botao2 tipo="danger">
+          Teste Botao 2
+        </Botao2>
       </Fragment>
     );
   }

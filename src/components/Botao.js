@@ -14,7 +14,7 @@ class Botao2 extends Component {
     render() {
         return (
             <button className={"btn btn-" + this.props.tipo}>
-                {this.props.texto}
+                {this.props.children}
             </button>
         );
     }
