@@ -8,11 +8,6 @@ class App extends Component {
     return (
       <Fragment>
         <Cabecalho usuario="@alex_aquiles" />
-        <Botao1 cor="red" texto="Teste 1"/>
-        <Botao1 cor="blue" texto="Teste 2"/>
-        <Botao2 tipo="danger">
-          Teste Botao 2
-        </Botao2>
       </Fragment>
     );
   }
