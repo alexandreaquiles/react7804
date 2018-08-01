@@ -17,17 +17,18 @@ class App extends Component {
     this.adicionaTweet = this.adicionaTweet.bind(this);
   }
 
-  render() {
-
-    let tweets;
+  getTweets() {
     if (! this.state.tweets.length) {
-        tweets = <p>Tweet algo pra timeline não ficar vazia.</p>;
+        return <p>Tweet algo pra timeline não ficar vazia.</p>;
     } else {
-        tweets = this.state.tweets.map(
+        return this.state.tweets.map(
             (tweetInfo, index) => 
                 <Tweet key={ tweetInfo + index} texto={tweetInfo} />
             );
     }
+  }
+
+  render() {
 
     return (
       <Fragment>
@@ -60,7 +61,7 @@ class App extends Component {
             <Dashboard posicao="centro">
                 <Widget>
                     <div className="tweetsArea">
-                        { tweets }                          
+                        { this.getTweets() }                          
                     </div>
                 </Widget>
             </Dashboard>
