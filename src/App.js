@@ -22,7 +22,6 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Botao texto="Foooo"/>
         <Cabecalho>
           <NavMenu usuario="@alex_aquiles" />
         </Cabecalho>
