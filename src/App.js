@@ -49,12 +49,14 @@ class App extends Component {
             <Dashboard posicao="centro">
                 <Widget>
                     <div className="tweetsArea">
-                        { this.state.tweets.map(
-                            (tweetInfo, index) => <Tweet key={ tweetInfo + index} texto={tweetInfo} />
-                        ) }
-                    </div>
-                    <div className="tweetsArea">
-                      { ! this.state.tweets.length && <p>Tweet algo pra timeline não ficar vazia.</p> }
+                        { ! this.state.tweets.length ?
+                          
+                          <p>Tweet algo pra timeline não ficar vazia.</p> :
+                            
+                          this.state.tweets.map(
+                            (tweetInfo, index) => 
+                                <Tweet key={ tweetInfo + index} texto={tweetInfo} />
+                            ) }
                     </div>
                 </Widget>
             </Dashboard>
