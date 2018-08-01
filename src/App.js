@@ -18,6 +18,17 @@ class App extends Component {
   }
 
   render() {
+
+    let tweets;
+    if (! this.state.tweets.length) {
+        tweets = <p>Tweet algo pra timeline não ficar vazia.</p>;
+    } else {
+        tweets = this.state.tweets.map(
+            (tweetInfo, index) => 
+                <Tweet key={ tweetInfo + index} texto={tweetInfo} />
+            );
+    }
+
     return (
       <Fragment>
         <Cabecalho>
@@ -49,14 +60,7 @@ class App extends Component {
             <Dashboard posicao="centro">
                 <Widget>
                     <div className="tweetsArea">
-                        { ! this.state.tweets.length ?
-                          
-                          <p>Tweet algo pra timeline não ficar vazia.</p> :
-                            
-                          this.state.tweets.map(
-                            (tweetInfo, index) => 
-                                <Tweet key={ tweetInfo + index} texto={tweetInfo} />
-                            ) }
+                        { tweets }                          
                     </div>
                 </Widget>
             </Dashboard>
