@@ -12,20 +12,10 @@ class App extends Component {
     super(props);
     this.state = {
       novoTweet: '',
-      tweets: []
+      tweets: [],
+      valor: 100
     };
     this.adicionaTweet = this.adicionaTweet.bind(this);
-  }
-
-  getTweets() {
-    if (! this.state.tweets.length) {
-        return <p>Tweet algo pra timeline não ficar vazia.</p>;
-    } else {
-        return this.state.tweets.map(
-            (tweetInfo, index) => 
-                <Tweet key={ tweetInfo + index} texto={tweetInfo} />
-            );
-    }
   }
 
   render() {
@@ -52,6 +42,9 @@ class App extends Component {
                         <button type="submit" 
                             disabled={ this.state.novoTweet.length > 140 ? true : false }
                             className="novoTweet__envia">Tweetar</button>
+                        <button style={{marginRight: 10}}
+                            onClick={ this.clickHandler }
+                            className="novoTweet__envia">Incrementar { this.state.valor } </button>
                     </form>
                 </Widget>
                 <Widget>
@@ -70,6 +63,25 @@ class App extends Component {
     );
   }
 
+  clickHandler = () => {
+    this.incrementa();
+    this.incrementa();
+  }
+
+  incrementa() {
+      this.setState( { valor: this.state.valor + 1 });
+  }
+
+  getTweets() {
+    if (! this.state.tweets.length) {
+        return <p>Tweet algo pra timeline não ficar vazia.</p>;
+    } else {
+        return this.state.tweets.map(
+            (tweetInfo, index) => 
+                <Tweet key={ tweetInfo + index} texto={tweetInfo} />
+            );
+    }
+  }
 
   adicionaTweet(event) {
     event.preventDefault();
