@@ -6,6 +6,8 @@ import Widget from './components/Widget'
 import TrendsArea from './components/TrendsArea'
 import Tweet from './components/Tweet'
 
+import Botao from './components/Botao'
+
 class App extends Component {
 
   constructor() {
@@ -20,6 +22,7 @@ class App extends Component {
   render() {
     return (
       <Fragment>
+        <Botao texto="Foooo"/>
         <Cabecalho>
           <NavMenu usuario="@alex_aquiles" />
         </Cabecalho>
