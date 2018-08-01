@@ -11,8 +11,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      novoTweet: '' 
+      novoTweet: '',
+      tweets: []
     };
+    this.adicionaTweet = this.adicionaTweet.bind(this);
   }
 
   render() {
@@ -24,7 +26,7 @@ class App extends Component {
         <div className="container">
             <Dashboard>
                 <Widget>
-                    <form className="novoTweet">
+                    <form className="novoTweet" onSubmit={ this.adicionaTweet }>
                         <div className="novoTweet__editorArea">
                             <span className={`
                                 novoTweet__status
@@ -47,13 +49,31 @@ class App extends Component {
             <Dashboard posicao="centro">
                 <Widget>
                     <div className="tweetsArea">
-                        <Tweet />
+                        { this.state.tweets.map(
+                            (tweetInfo, index) => <Tweet key={ tweetInfo + index} texto={tweetInfo} />
+                        ) }
+                    </div>
+                    <div>
+                      { ! this.state.tweets.length && <p>Tweet algo pra timeline não ficar vazia.</p> }
                     </div>
                 </Widget>
             </Dashboard>
         </div>
       </Fragment>
     );
+  }
+
+
+  adicionaTweet(event) {
+    event.preventDefault();
+    const novoTweet = this.state.novoTweet;
+    const tweetsAntigos = this.state.tweets;
+    if (novoTweet) {
+        this.setState({
+            tweets: [ novoTweet, ...tweetsAntigos ],
+            novoTweet: ''
+        });
+    }
   }
 }
 
