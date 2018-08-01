@@ -8,8 +8,8 @@ import Tweet from './components/Tweet'
 
 class App extends Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       novoTweet: '',
       tweets: []
