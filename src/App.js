@@ -6,8 +6,6 @@ import Widget from './components/Widget'
 import TrendsArea from './components/TrendsArea'
 import Tweet from './components/Tweet'
 
-import Botao from './components/Botao'
-
 class App extends Component {
 
   constructor() {
@@ -55,7 +53,7 @@ class App extends Component {
                             (tweetInfo, index) => <Tweet key={ tweetInfo + index} texto={tweetInfo} />
                         ) }
                     </div>
-                    <div>
+                    <div className="tweetsArea">
                       { ! this.state.tweets.length && <p>Tweet algo pra timeline não ficar vazia.</p> }
                     </div>
                 </Widget>
