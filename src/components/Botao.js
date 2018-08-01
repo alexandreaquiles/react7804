@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 
 class Botao extends Component {
 
-    constructor(props) {
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick() {
+    handleClick = () => {
         console.log(this.props.texto);
     }
 
