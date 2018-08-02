@@ -1,8 +1,28 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Home from './pages/Home';
 import LoginPage from './pages/LoginPage';
+
+function estaAutenticado() {
+    if (localStorage.getItem('TOKEN')) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+class PrivateRoute extends Component {
+    render() {
+        const Component = this.props.component;
+        const props = this.props;
+        if (estaAutenticado()) {
+            return ( <Route render={ () => <Component {...props} /> } /> );
+        } else {
+            return ( <Redirect to="/login" /> );
+        }
+    }
+}
 
 class Roteamento extends Component {
     render() {
@@ -10,7 +30,7 @@ class Roteamento extends Component {
         return (
 
             <Switch>
-                <Route path="/" component={ Home } exact />
+                <PrivateRoute path="/" component={ Home } exact />
                 <Route path="/login" component={ LoginPage } exact />
             </Switch>
 
