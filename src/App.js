@@ -69,7 +69,9 @@ class App extends Component {
   }
 
   incrementa() {
-      this.setState( { valor: this.state.valor + 1 });
+      this.setState( state => ({
+          valor: state.valor + 1
+      }));
   }
 
   getTweets() {
