@@ -5,6 +5,14 @@ import './loginPage.css'
 
 
 class LoginPage extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            mostraErro: false
+        }
+    }
+
     render() {
         return (
             <div className="loginPage">
@@ -26,9 +34,9 @@ class LoginPage extends Component {
                                     ref={ inputSenha => this.inputSenha = inputSenha }
                                     className="loginPage__input" type="password" id="senha" name="senha"/>
                             </div>
-                            {/* <div className="loginPage__errorBox">
-                                Mensagem de erro!
-                            </div> */}
+                            { this.state.mostraErro && <div className="loginPage__errorBox">
+                                Usuário e/ou senha inválidos.
+                            </div> }
                             <div className="loginPage__inputWrap">
                                 <button className="loginPage__btnLogin" type="submit">
                                     Logar
@@ -69,6 +77,7 @@ class LoginPage extends Component {
         .catch(responseError => {
             responseError.json().then(erroEmJSON => {
                 console.error(erroEmJSON);
+                this.setState({ mostraErro: true });
             });
         });
     }
