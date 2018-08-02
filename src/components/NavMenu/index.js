@@ -1,7 +1,7 @@
 import React from 'react'
 import './navMenu.css'
 
-const NavMenu  = (props) => {
+const NavMenu  = function (props) {
         return (
             <nav className="navMenu">
                 <ul className="navMenu__lista">
