@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './navMenu.css'
 
-class NavMenu extends Component {
-    render() {
+const NavMenu  = (props) => {
         return (
             <nav className="navMenu">
                 <ul className="navMenu__lista">
                 <li className="navMenu__item">
                     <a className="navMenu__link">
                         Bem vindo(a): <br />
-                        <strong>{ this.props.usuario }</strong>
+                        <strong>{ props.usuario }</strong>
                     </a>
                 </li>
                 <li className="navMenu__item">
@@ -24,7 +23,6 @@ class NavMenu extends Component {
                 </ul>
             </nav>
         )
-    }
 }
 
 export default NavMenu
