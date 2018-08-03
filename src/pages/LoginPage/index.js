@@ -73,6 +73,7 @@ class LoginPage extends Component {
         })
         .then(responseEmJSON => {
             localStorage.setItem('TOKEN', responseEmJSON.token);
+            localStorage.setItem('LOGIN', dadosDeLogin.login);
             this.props.history.push('/');
         })
         .catch(responseError => {

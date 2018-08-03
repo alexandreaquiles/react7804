@@ -22,7 +22,7 @@ class Home extends Component {
     return (
       <Fragment>
         <Cabecalho>
-          <NavMenu usuario="@alex_aquiles" />
+          <NavMenu usuario={ `@${localStorage.getItem('LOGIN')}` } />
         </Cabecalho>
         <div className="container">
             <Dashboard>
@@ -65,7 +65,9 @@ class Home extends Component {
     } else {
         return this.state.tweets.map(
             (tweetInfo, index) => 
-                <Tweet key={ tweetInfo + index} texto={tweetInfo} />
+                <Tweet key={ tweetInfo._id }
+                       texto={ tweetInfo.conteudo }
+                       tweetInfo={ tweetInfo } />
             );
     }
   }
@@ -75,9 +77,14 @@ class Home extends Component {
     const novoTweet = this.state.novoTweet;
     const tweetsAntigos = this.state.tweets;
     if (novoTweet) {
-        this.setState({
-            tweets: [ novoTweet, ...tweetsAntigos ],
-            novoTweet: ''
+        fetch(`https://twitelum-api.herokuapp.com/tweets?X-AUTH-TOKEN=${localStorage.getItem('TOKEN')}`,
+        { method: 'POST', body: JSON.stringify( { conteudo: novoTweet }) })
+        .then( response => response.json() )
+        .then( novoTweetRegistradoNoServer => {
+            this.setState({
+                tweets: [ novoTweetRegistradoNoServer, ...tweetsAntigos ],
+                novoTweet: ''
+            });
         });
     }
   }
