@@ -26,6 +26,7 @@ class LoginPage extends Component {
                                 <label className="loginPage__label" htmlFor="login">Login</label> 
                                 <input 
                                     ref={ inputLogin => this.inputLogin = inputLogin }
+                                    onChange={ this.onUpdateLogin }
                                     className="loginPage__input" type="text" id="login" name="login"/>
                             </div>
                             <div className="loginPage__inputWrap">
@@ -80,6 +81,13 @@ class LoginPage extends Component {
                 this.setState({ mostraErro: true });
             });
         });
+    }
+
+
+    onUpdateLogin = () => {
+        if (this.inputLogin.value.length >= 10) {
+            this.inputSenha.focus();
+        }
     }
 }
 
