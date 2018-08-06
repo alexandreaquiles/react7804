@@ -41,6 +41,7 @@ class Home extends Component {
                         <button type="submit" 
                             disabled={ this.state.novoTweet.length > 140 ? true : false }
                             className="novoTweet__envia">Tweetar</button>
+                        <button className="novoTweet__enviar" onClick={ this.cliqueJogar }>Jogar</button>
                     </form>
                 </Widget>
                 <Widget>
@@ -57,6 +58,28 @@ class Home extends Component {
         </div>
       </Fragment>
     );
+  }
+
+  cliqueJogar = () => {
+    let bilhete = prompt('Digite um número de 1 a 6');
+    bilhete = parseInt(bilhete, 10);
+    this.jogar(bilhete)
+      .then( premio => window.alert(`Ganhei R$ ${ premio }`))
+      .catch( sorteado => window.alert(`Perdeu, foi sorteado ${ sorteado }`) );
+  
+  }
+
+  jogar = bilhete => {
+    return new Promise ((resolve, reject) => {
+      setTimeout(() => {
+        let sorteado = Math.floor( Math.random() * 6) + 1;
+        if (bilhete === sorteado) {
+          resolve(10000);
+        } else {
+          reject(sorteado);
+        }
+      }, 2000);
+    });
   }
 
   getTweets() {
