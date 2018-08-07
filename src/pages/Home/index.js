@@ -60,9 +60,27 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    this.listarTweets();
+    console.log('componentDidMount');
+  }
+
+  componentWillMount() {
+    console.log('componentWillMount');
+  }
+
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
+
+  componentWillUnmount() {
+    console.log('componentWillUnmount');
+  }
+
+  listarTweets() {
     fetch(`https://twitelum-api.herokuapp.com/tweets?X-AUTH-TOKEN=${localStorage.getItem('TOKEN')}`)
       .then(response => response.json())
       .then(tweets => {
+        console.log('Tweets recuperados');
         this.setState({ tweets });
       });
   }
