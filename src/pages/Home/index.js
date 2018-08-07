@@ -59,6 +59,14 @@ class Home extends Component {
     );
   }
 
+  componentDidMount() {
+    fetch(`https://twitelum-api.herokuapp.com/tweets?X-AUTH-TOKEN=${localStorage.getItem('TOKEN')}`)
+      .then(response => response.json())
+      .then(tweets => {
+        this.setState({ tweets });
+      });
+  }
+
   getTweets() {
     if (! this.state.tweets.length) {
         return <p>Tweet algo pra timeline não ficar vazia.</p>;
