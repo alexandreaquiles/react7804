@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Um contador</title>
+    <script src="https://unpkg.com/redux@latest/dist/redux.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <p>
+            Clicou:
+            <span id="value">0</span> vezes
+            <button id="increment">+</button>
+            <button id="decrement">-</button>
+            <button id="incrementIfOdd">Incrementa se for ímpar</button>
+            <button id="incrementAsync">Incrementa assíncrono</button>
+        </p>
+    </div>
+    <script>
+        var valueEl = document.getElementById('value');
+
+        //TODO counter
+
+        function render() {
+            //TODO
+        }
+
+        //TODO createStore
+
+        render()
+
+        document.getElementById('increment')
+            .addEventListener('click', function () {
+                //TODO
+            });
+
+        document.getElementById('decrement')
+            .addEventListener('click', function () {
+                //TODO
+            });
+
+        document.getElementById('incrementIfOdd')
+            .addEventListener('click', function () {
+                //TODO
+            });
+
+        document.getElementById('incrementAsync')
+            .addEventListener('click', function () {
+                setTimeout(function () {
+                    //TODO
+                }, 1000)
+            });
+    </script>
+</body>
+
+</html>
