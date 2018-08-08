@@ -79,9 +79,9 @@ class Home extends Component {
 
   componentWillMount() {
     console.log('componentWillMount');
-    window.store.subscribe(() => {
+    this.context.store.subscribe(() => {
         this.setState({
-            tweets: window.store.getState()
+            tweets: this.context.store.getState()
         });
     });
   }
@@ -99,7 +99,7 @@ class Home extends Component {
       .then(response => response.json())
       .then(tweets => {
         console.log('Tweets recuperados');
-        window.store.dispatch({ type: 'CARREGA_TWEETS', tweets });
+        this.context.store.dispatch({ type: 'CARREGA_TWEETS', tweets });
       });
   }
 
@@ -170,6 +170,10 @@ class Home extends Component {
           });
       }
   }
+}
+
+Home.contextTypes = {
+    store: null
 }
 
 export default Home;
