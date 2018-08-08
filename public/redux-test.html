@@ -66,12 +66,20 @@
         document.getElementById('incrementIfOdd')
             .addEventListener('click', function () {
                 //TODO
+                if ( store.getState() % 2 != 0 ) {
+                    store.dispatch({
+                        type: 'increment'
+                    });
+                }
             });
 
         document.getElementById('incrementAsync')
             .addEventListener('click', function () {
                 setTimeout(function () {
                     //TODO
+                    store.dispatch({
+                        type: 'increment'
+                    });
                 }, 1000)
             });
     </script>
