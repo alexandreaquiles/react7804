@@ -79,6 +79,11 @@ class Home extends Component {
 
   componentWillMount() {
     console.log('componentWillMount');
+    window.store.subscribe(() => {
+        this.setState({
+            tweets: window.store.getState()
+        });
+    });
   }
 
   componentDidUpdate() {
@@ -94,7 +99,7 @@ class Home extends Component {
       .then(response => response.json())
       .then(tweets => {
         console.log('Tweets recuperados');
-        this.setState({ tweets });
+        window.store.dispatch({ type: 'CARREGA_TWEETS', tweets });
       });
   }
 
