@@ -21,23 +21,46 @@
         var valueEl = document.getElementById('value');
 
         //TODO counter
+        function counter (state, action) {
+            if (typeof state === 'undefined') {
+                return 0;
+            }
 
-        function render() {
-            //TODO
+            switch(action.type) {
+                case 'increment': 
+                    return state + 1;
+                case 'decrement':
+                    return state - 1;
+                default:
+                    return state;
+            }
         }
 
         //TODO createStore
+        var store = Redux.createStore(counter);
 
-        render()
+        function render() {
+            valueEl.innerHTML = store.getState().toString();
+        }
+
+        render();
+
+        store.subscribe(render);
 
         document.getElementById('increment')
             .addEventListener('click', function () {
                 //TODO
+                store.dispatch({
+                    type: 'increment'
+                });
             });
 
         document.getElementById('decrement')
             .addEventListener('click', function () {
                 //TODO
+                store.dispatch({
+                    type: 'decrement'
+                });
             });
 
         document.getElementById('incrementIfOdd')
