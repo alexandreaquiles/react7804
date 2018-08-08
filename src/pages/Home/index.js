@@ -5,6 +5,7 @@ import Dashboard from '../../components/Dashboard'
 import Widget from '../../components/Widget'
 import TrendsArea from '../../components/TrendsArea'
 import Tweet from '../../components/Tweet'
+import Modal from '../../components/Modal'
 
 class Home extends Component {
 
@@ -12,7 +13,8 @@ class Home extends Component {
     super(props);
     this.state = {
       novoTweet: '',
-      tweets: []
+      tweets: [],
+      tweetAtivo: {}
     };
     this.adicionaTweet = this.adicionaTweet.bind(this);
   }
@@ -54,6 +56,17 @@ class Home extends Component {
                     </div>
                 </Widget>
             </Dashboard>
+            <Modal fechaModal={this.fechaModal} isAberto={!!this.state.tweetAtivo._id}>
+              <Widget>
+                <Tweet
+                  key={this.state.tweetAtivo._id}
+                  removeHandler={event => this.removeTweet(this.state.tweetAtivo._id)}
+                  texto={this.state.tweetAtivo.conteudo||''}
+                  tweetInModal={true}
+                  tweetInfo={this.state.tweetAtivo}
+                  />
+              </Widget>
+            </Modal>
         </div>
       </Fragment>
     );
@@ -94,7 +107,8 @@ class Home extends Component {
                 <Tweet key={ tweetInfo._id }
                        texto={ tweetInfo.conteudo }
                        tweetInfo={ tweetInfo }
-                       removeHandler={ event => this.removeTweet(tweetInfo._id) } />
+                       removeHandler={ event => this.removeTweet(tweetInfo._id) }
+                       handleAbreModalParaTweet={ event => this.abreModalParaTweet(event, tweetInfo._id) } />
             );
     }
   }
@@ -125,9 +139,31 @@ class Home extends Component {
         console.log(response);
         const listaDeTweetsAtualizada = this.state.tweets.filter( tweets => tweets._id !== idTweetQueVaiSerRemovido );
         this.setState({
-          tweets: listaDeTweetsAtualizada
+          tweets: listaDeTweetsAtualizada,
+          tweetAtivo: { }
         });
       })
+  }
+
+  abreModalParaTweet = (event, idSelecionado) => {
+    const isTweetFooter = event.target.closest('.tweet__footer');
+    if ( isTweetFooter ) {
+        return false;
+    }
+    const tweetSelecionado = this.state.tweets.find( tweet => tweet._id === idSelecionado);
+
+    this.setState({
+        tweetAtivo: tweetSelecionado
+    })
+  }
+
+  fechaModal = event => {
+      const isModal = event.target.closest('.widget');
+      if (!isModal) {
+          this.setState({
+              tweetAtivo: {}
+          });
+      }
   }
 }
 

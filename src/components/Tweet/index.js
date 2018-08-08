@@ -29,7 +29,7 @@ class Tweet extends Component {
 
     render() {
         return (
-            <article className="tweet">
+            <article className="tweet" onClick={this.props.handleAbreModalParaTweet}>
                 <div className="tweet__cabecalho">
                     <img className="tweet__fotoUsuario" src={ this.props.tweetInfo.usuario.foto } alt="" />
                     <span className="tweet__nomeUsuario">{ this.props.tweetInfo.usuario.nome }</span>
@@ -54,6 +54,12 @@ class Tweet extends Component {
                         <button onClick={ this.props.removeHandler } className="btn btn--blue btn--remove">X</button>
                     }
                 </footer>
+                <div className="tweet__likeadores">
+                {
+                    this.props.tweetInModal &&
+                    this.props.tweetInfo.likes.map(liker => `@${liker.usuario.login}`)
+                }
+                </div>
             </article>
         )
     }
@@ -61,6 +67,8 @@ class Tweet extends Component {
 
 Tweet.propTypes = {
     removeHandler: PropTypes.func.isRequired,
+    handleAbreModalParaTweet: PropTypes.func,
+    tweetInModal: PropTypes.bool,
     texto: PropTypes.string.isRequired,
     tweetInfo: PropTypes.shape({
         _id: PropTypes.string,
