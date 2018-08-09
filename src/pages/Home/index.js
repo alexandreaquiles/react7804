@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
+
 import Cabecalho from '../../components/Cabecalho'
 import NavMenu from '../../components/NavMenu'
 import Dashboard from '../../components/Dashboard'
@@ -117,19 +119,10 @@ class Home extends Component {
 
   adicionaTweet(event) {
     event.preventDefault();
-    const novoTweet = this.state.novoTweet;
-    const tweetsAntigos = this.state.tweets;
-    if (novoTweet) {
-        fetch(`https://twitelum-api.herokuapp.com/tweets?X-AUTH-TOKEN=${localStorage.getItem('TOKEN')}`,
-        { method: 'POST', body: JSON.stringify( { conteudo: novoTweet }) })
-        .then( response => response.json() )
-        .then( novoTweetRegistradoNoServer => {
-            this.setState({
-                tweets: [ novoTweetRegistradoNoServer, ...tweetsAntigos ],
-                novoTweet: ''
-            });
-        });
-    }
+    this.context.store.dispatch(TweetsAPI.adiciona(this.state.novoTweet));
+    this.setState({
+        novoTweet: ''
+    });
   }
 
   removeTweet(idTweetQueVaiSerRemovido) {
@@ -170,7 +163,7 @@ class Home extends Component {
 }
 
 Home.contextTypes = {
-    store: null
+    store: PropTypes.object
 }
 
 export default Home;
