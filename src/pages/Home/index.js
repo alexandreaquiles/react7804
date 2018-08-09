@@ -7,6 +7,8 @@ import TrendsArea from '../../components/TrendsArea'
 import Tweet from '../../components/Tweet'
 import Modal from '../../components/Modal'
 
+import * as TweetsAPI from '../../api/TweetsAPI'
+
 class Home extends Component {
 
   constructor(props) {
@@ -95,12 +97,7 @@ class Home extends Component {
   }
 
   listarTweets() {
-    fetch(`https://twitelum-api.herokuapp.com/tweets?X-AUTH-TOKEN=${localStorage.getItem('TOKEN')}`)
-      .then(response => response.json())
-      .then(tweets => {
-        console.log('Tweets recuperados');
-        this.context.store.dispatch({ type: 'CARREGA_TWEETS', tweets });
-      });
+    this.context.store.dispatch(TweetsAPI.carrega());
   }
 
   getTweets() {
