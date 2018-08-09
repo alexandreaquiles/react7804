@@ -6,9 +6,9 @@ import NavMenu from '../../components/NavMenu'
 import Dashboard from '../../components/Dashboard'
 import Widget from '../../components/Widget'
 import TrendsArea from '../../components/TrendsArea'
-import Tweet from '../../components/Tweet'
 import Modal from '../../components/Modal'
 
+import Tweet from '../../containers/TweetPadrao'
 import * as TweetsAPI from '../../api/TweetsAPI'
 
 class Home extends Component {
@@ -64,7 +64,6 @@ class Home extends Component {
               <Widget>
                 <Tweet
                   key={this.state.tweetAtivo._id}
-                  removeHandler={event => this.removeTweet(this.state.tweetAtivo._id)}
                   texto={this.state.tweetAtivo.conteudo||''}
                   tweetInModal={true}
                   tweetInfo={this.state.tweetAtivo}
@@ -111,7 +110,6 @@ class Home extends Component {
                 <Tweet key={ tweetInfo._id }
                        texto={ tweetInfo.conteudo }
                        tweetInfo={ tweetInfo }
-                       removeHandler={ event => this.removeTweet(tweetInfo._id) }
                        handleAbreModalParaTweet={ event => this.abreModalParaTweet(event, tweetInfo._id) } />
             );
     }
@@ -123,11 +121,6 @@ class Home extends Component {
     this.setState({
         novoTweet: ''
     });
-  }
-
-  removeTweet(idTweetQueVaiSerRemovido) {
-    console.log(idTweetQueVaiSerRemovido);
-    this.context.store.dispatch(TweetsAPI.remove(idTweetQueVaiSerRemovido));
   }
 
   abreModalParaTweet = (event, idSelecionado) => {
