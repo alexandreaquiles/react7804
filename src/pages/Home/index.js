@@ -117,7 +117,7 @@ class Home extends Component {
     }
   }
 
-  adicionaTweet(event) {
+  adicionaTweet = (event) => {
     event.preventDefault();
     this.context.store.dispatch(TweetsAPI.adiciona(this.state.novoTweet));
     this.setState({
@@ -127,17 +127,7 @@ class Home extends Component {
 
   removeTweet(idTweetQueVaiSerRemovido) {
     console.log(idTweetQueVaiSerRemovido);
-    fetch(`https://twitelum-api.herokuapp.com/tweets/${idTweetQueVaiSerRemovido}/?X-AUTH-TOKEN=${localStorage.getItem('TOKEN')}`,
-      {method: 'DELETE'})
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        const listaDeTweetsAtualizada = this.state.tweets.filter( tweets => tweets._id !== idTweetQueVaiSerRemovido );
-        this.setState({
-          tweets: listaDeTweetsAtualizada,
-          tweetAtivo: { }
-        });
-      })
+    this.context.store.dispatch(TweetsAPI.remove(idTweetQueVaiSerRemovido));
   }
 
   abreModalParaTweet = (event, idSelecionado) => {

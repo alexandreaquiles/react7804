@@ -10,6 +10,11 @@ function tweetsReducer(state=[], action={}) {
         state = [action.novoTweet, ...state];
     }
 
+    if (action.type === 'REMOVE_TWEET') {
+        const listaDeTweetsAtualizada = state.filter( tweet => tweet._id !== action.idTweetQueVaiSerRemovido );
+        state = listaDeTweetsAtualizada
+    }
+
     return state;
 }
 

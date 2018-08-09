@@ -20,3 +20,16 @@ export const adiciona = novoTweet => {
         }
     }
 }
+
+export const remove = idTweetQueVaiSerRemovido => {
+    return dispatch => {
+        fetch(`https://twitelum-api.herokuapp.com/tweets/${idTweetQueVaiSerRemovido}/?X-AUTH-TOKEN=${localStorage.getItem('TOKEN')}`,
+            {method: 'DELETE'})
+            .then(response => response.json())
+            .then(response => {
+                console.log(response);
+               dispatch({ type: 'REMOVE_TWEET', idTweetQueVaiSerRemovido});
+            })
+    }
+}
+
