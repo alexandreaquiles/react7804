@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as TweetsAPI from '../api/TweetsAPI';
 import Tweet from '../components/Tweet';
 
-const mapStateToProps = state => {}
+const mapStateToProps = state => ({ quantidade: state.length })
 
 const mapDispatchToProps = (dispatch, propsRecebidas) => {
     return {
