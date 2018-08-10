@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk'
 
 function tweetsReducer(state={lista: [], tweetAtivo: {}}, action={}) {
@@ -62,7 +62,23 @@ function tweetsReducer(state={lista: [], tweetAtivo: {}}, action={}) {
     return state;
 }
 
-const store = createStore(tweetsReducer, applyMiddleware(thunk));
+function notificacaoReducer(state = '', action = {}) {
+    if (action.type === 'ADD_NOTIFICACAO') {
+        state = action.notificacao;
+    }
+    if (action.type === 'REMOVE_NOTIFICACAO') {
+        state = '';
+    }
+    return state;
+}
+
+const store = createStore(
+    combineReducers({
+        tweets: tweetsReducer,
+        notificacao: notificacaoReducer
+    }),
+    applyMiddleware(thunk)
+);
 
 console.log(`Primeira versão da store: `, store.getState());
 
