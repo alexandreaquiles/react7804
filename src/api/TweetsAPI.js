@@ -34,3 +34,15 @@ export const remove = idTweetQueVaiSerRemovido => {
     }
 }
 
+export const like = (idTweetLikeado, liker) => {
+    return dispatch => {
+
+        fetch(`http://twitelum-api.herokuapp.com/tweets/${idTweetLikeado}/like?X-AUTH-TOKEN=${localStorage.getItem('TOKEN')}`, {method: 'POST'})
+            .then(response => response.json())
+            .then(response => {
+                dispatch({ type: 'LIKE', idTweetLikeado, liker: response.liker });
+            })
+        
+    }
+}
+
