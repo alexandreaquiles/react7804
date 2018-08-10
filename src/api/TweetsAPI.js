@@ -30,10 +30,6 @@ export const remove = idTweetQueVaiSerRemovido => {
                 console.log(response);
                dispatch({ type: 'REMOVE_TWEET', idTweetQueVaiSerRemovido});
                dispatch({ type: 'REMOVE_TWEET_ATIVO'})
-               dispatch({ type: 'ADD_NOTIFICACAO', notificacao: 'Tweet excluído com sucesso'})
-               setTimeout(() => {
-                   dispatch( { type: 'REMOVE_NOTIFICACAO'})
-               }, 2000);
             })
     }
 }
