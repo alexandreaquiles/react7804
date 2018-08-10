@@ -29,6 +29,7 @@ export const remove = idTweetQueVaiSerRemovido => {
             .then(response => {
                 console.log(response);
                dispatch({ type: 'REMOVE_TWEET', idTweetQueVaiSerRemovido});
+               dispatch({ type: 'REMOVE_TWEET_ATIVO'})
             })
     }
 }

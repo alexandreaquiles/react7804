@@ -84,7 +84,8 @@ class Home extends Component {
     console.log('componentWillMount');
     this.context.store.subscribe(() => {
         this.setState({
-            tweets: this.context.store.getState()
+            tweets: this.context.store.getState().lista,
+            tweetAtivo: this.context.store.getState().tweetAtivo
         });
     });
   }
@@ -129,18 +130,13 @@ class Home extends Component {
         return false;
     }
     const tweetSelecionado = this.state.tweets.find( tweet => tweet._id === idSelecionado);
-
-    this.setState({
-        tweetAtivo: tweetSelecionado
-    })
+    this.context.store.dispatch({type: 'ADD_TWEET_ATIVO', tweetSelecionado});
   }
 
   fechaModal = event => {
       const isModal = event.target.closest('.widget');
       if (!isModal) {
-          this.setState({
-              tweetAtivo: {}
-          });
+        this.context.store.dispatch({type: 'REMOVE_TWEET_ATIVO'});
       }
   }
 }
